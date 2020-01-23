@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.demoone.injection.module.BaseActivityModule
 import com.example.demoone.injection.qualifiers.ActivityContext
 import com.example.demoone.injection.scope.FragmentScope
+import com.example.demoone.ui.home.dashboard.DashboardActivityModule
 import com.example.demoone.ui.home.dashboard.DashboardFragment
 import com.example.demoone.ui.home.login.LoginFragment
 import com.example.demoone.ui.home.register.RegistrationFragment
@@ -22,7 +23,7 @@ abstract class HomeActivityModule {
   internal abstract fun showSplashFragment(): SplashFragment
 
   @FragmentScope
-  @ContributesAndroidInjector
+  @ContributesAndroidInjector(modules = [DashboardActivityModule::class])
   internal abstract fun showDashboardFragment(): DashboardFragment
 
   @FragmentScope

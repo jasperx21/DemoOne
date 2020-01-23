@@ -19,22 +19,22 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
     }
   }
 
-  fun verifyUser(
-    userName: String,
+  fun verifyLoginPassword(
     password: String
   ): Result<User> {
+    Thread.sleep(2000)
     return if (password != sharedPreferences.getString(User.PASSWORD, ""))
       Result.Failure(Error("Wrong Password"))
     else
-      Result.Success(
-          User(userName, getUserName(), password)
-      )
+      Result.Success(User("", "", ""))
   }
 
-  fun deleteUser() {
+  fun deleteUser(): Result<User> {
+    Thread.sleep(2000)
     sharedPreferences.edit()
         .clear()
         .apply()
+    return Result.Success(User("", "", ""))
   }
 
   fun isUserRegistered(): Boolean {

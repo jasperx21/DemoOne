@@ -27,6 +27,7 @@
         android:indeterminate="true"
         android:scaleY="5"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="@{viewModel.progress.booleanValue()?View.VISIBLE:View.INVISIBLE}"
         />
 
     <fragment

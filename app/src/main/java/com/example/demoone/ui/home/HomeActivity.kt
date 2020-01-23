@@ -15,7 +15,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    viewModel.loading.observe(this, Observer {
+    viewModel.progress.observe(this, Observer {
       binding.progressBar.visibility = if (it) View.VISIBLE else View.INVISIBLE
     })
   }
