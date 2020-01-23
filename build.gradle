@@ -9,6 +9,8 @@ buildscript {
     ext.rxVersion = '2.2.11'
     ext.rxAndroidVersion = '2.1.1'
     ext.lifecycleVersion = '2.2.0'
+    ext.navVersion = '2.2.0'
+
     repositories {
         google()
         jcenter()

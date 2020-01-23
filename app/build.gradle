@@ -69,4 +69,8 @@ dependencies {
 
   // Coroutines
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+  // Navigation
+  implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+  implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 }
