@@ -1,4 +1,4 @@
-package com.mutualmobile.praxis.injection.scope
+package com.example.demoone.injection.scope
 
 import javax.inject.Scope
 

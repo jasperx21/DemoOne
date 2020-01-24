@@ -1,10 +1,11 @@
 package com.example.demoone.ui.home.login
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.demoone.data.model.User
+import com.example.demoone.data.source.Result
 import com.example.demoone.repository.MainRepository
-import com.example.demoone.repository.Result
 import com.example.demoone.ui.base.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,8 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
 
   private val loginState = MutableLiveData<Result<User>>()
   private val deleteUserState = MutableLiveData<Result<User>>()
+
+    var greeting = ""
 
   fun getLoginState(): LiveData<Result<User>> {
     return loginState
@@ -37,6 +40,12 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
       loginState.postValue(result)
     }
   }
+
+    fun loadArguments(arguments: Bundle?) {
+        arguments?.let {
+            greeting = "Welcome back, ${it.getString(User.NAME, "")}"
+        }
+    }
 
   fun deleteUser() {
     mainRepository.progress.value = true

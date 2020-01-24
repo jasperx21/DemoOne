@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.android.support.DaggerFragment
 
 @Module
-abstract class DashboardActivityModule {
+abstract class DashboardFragmentModule {
 
   @Binds
   @FragmentScope

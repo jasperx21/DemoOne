@@ -3,8 +3,8 @@ package com.example.demoone.ui.home.register
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.demoone.data.model.User
+import com.example.demoone.data.source.Result
 import com.example.demoone.repository.MainRepository
-import com.example.demoone.repository.Result
 import com.example.demoone.ui.base.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

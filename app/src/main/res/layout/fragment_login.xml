@@ -22,7 +22,7 @@
         android:id="@+id/tv_welcome_text"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:hint="Welcome"
+        android:hint="@{viewModel.greeting}"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

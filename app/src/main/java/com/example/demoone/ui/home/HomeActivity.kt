@@ -3,6 +3,7 @@ package com.example.demoone.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation.findNavController
 import com.example.demoone.R
 import com.example.demoone.databinding.ActivityHomeBinding
 import com.example.demoone.ui.base.BaseActivity
@@ -19,5 +20,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
       binding.progressBar.visibility = if (it) View.VISIBLE else View.INVISIBLE
     })
   }
+
+    override fun onSupportNavigateUp() =
+        findNavController(this, R.id.nav_host_fragment).navigateUp()
+
 
 }

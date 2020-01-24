@@ -1,8 +1,8 @@
 package com.example.demoone.injection.module
 
 import android.content.SharedPreferences
+import com.example.demoone.data.source.UserManager
 import com.example.demoone.repository.MainRepository
-import com.example.demoone.repository.UserManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

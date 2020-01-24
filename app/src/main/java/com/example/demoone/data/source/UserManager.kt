@@ -1,13 +1,17 @@
-package com.example.demoone.repository
+package com.example.demoone.data.source
 
 import android.content.SharedPreferences
 import com.example.demoone.data.model.User
+import com.example.demoone.data.source.Result.Failure
+import com.example.demoone.data.source.Result.Success
 
 class UserManager constructor(private val sharedPreferences: SharedPreferences) {
 
   fun registerUser(user: User): Result<User> {
     if (user.userName.isEmpty() || user.password.isEmpty() || user.name.isEmpty())
-      return Result.Failure(Error("Invalid credentials"))
+        return Failure(
+            Error("Invalid credentials")
+        )
     else {
       Thread.sleep(3000)
       sharedPreferences.edit()
@@ -15,7 +19,7 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
           .putString(User.NAME, user.name)
           .putString(User.PASSWORD, user.password)
           .apply()
-      return Result.Success(user)
+        return Success(user)
     }
   }
 
@@ -24,9 +28,9 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
   ): Result<User> {
     Thread.sleep(2000)
     return if (password != sharedPreferences.getString(User.PASSWORD, ""))
-      Result.Failure(Error("Wrong Password"))
+        Failure(Error("Wrong Password"))
     else
-      Result.Success(User("", "", ""))
+        Success(User("", "", ""))
   }
 
   fun deleteUser(): Result<User> {
@@ -34,14 +38,15 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
     sharedPreferences.edit()
         .clear()
         .apply()
-    return Result.Success(User("", "", ""))
+      return Success(User("", "", ""))
   }
 
   fun isUserRegistered(): Boolean {
+      Thread.sleep(2000)
     return (sharedPreferences.contains(User.USER_NAME) && sharedPreferences.contains(User.PASSWORD))
   }
 
-  private fun getUserName(): String {
+    fun getName(): String {
     return sharedPreferences.getString(User.NAME, "")!!
   }
 

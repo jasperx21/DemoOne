@@ -1,8 +1,8 @@
 package com.example.demoone.injection.module
 
+import com.example.demoone.injection.scope.ActivityScope
 import com.example.demoone.ui.home.HomeActivity
 import com.example.demoone.ui.home.HomeActivityModule
-import com.mutualmobile.praxis.injection.scope.ActivityScope
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Binds
 import dagger.Module
