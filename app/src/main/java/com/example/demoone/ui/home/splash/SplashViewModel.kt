@@ -13,22 +13,22 @@ import javax.inject.Inject
 
 class SplashViewModel @Inject constructor() : BaseViewModel() {
 
-    @Inject
-    lateinit var mainRepository: MainRepository
+  @Inject
+  lateinit var mainRepository: MainRepository
 
-    private val isUserRegistered = MutableLiveData<Boolean>()
+  private val isUserRegistered = MutableLiveData<Boolean>()
 
-    fun getIsUserRegistered(): LiveData<Boolean> {
-        return isUserRegistered
+  fun getIsUserRegistered(): LiveData<Boolean> {
+    return isUserRegistered
+  }
+
+  fun isUserRegistered() {
+    CoroutineScope(Dispatchers.IO).launch {
+      isUserRegistered.postValue(mainRepository.userManager.isUserRegistered())
     }
+  }
 
-    fun isUserRegistered() {
-        CoroutineScope(Dispatchers.IO).launch {
-            isUserRegistered.postValue(mainRepository.userManager.isUserRegistered())
-        }
-    }
-
-    fun createArgumentsFromSplashToLogin(): Bundle {
-        return Bundle().apply { putString(User.NAME, mainRepository.userManager.getName()) }
-    }
+  fun createArgumentsFromSplashToLogin(): Bundle {
+    return Bundle().apply { putString(User.NAME, mainRepository.userManager.getName()) }
+  }
 }

@@ -21,8 +21,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     })
   }
 
-    override fun onSupportNavigateUp() =
-        findNavController(this, R.id.nav_host_fragment).navigateUp()
-
+  override fun onSupportNavigateUp() =
+    findNavController(this, R.id.nav_host_fragment).navigateUp()
 
 }

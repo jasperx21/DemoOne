@@ -22,7 +22,7 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
   private val loginState = MutableLiveData<Result<User>>()
   private val deleteUserState = MutableLiveData<Result<User>>()
 
-    var greeting = ""
+  var greeting = ""
 
   fun getLoginState(): LiveData<Result<User>> {
     return loginState
@@ -41,11 +41,11 @@ class LoginViewModel @Inject constructor() : BaseViewModel() {
     }
   }
 
-    fun loadArguments(arguments: Bundle?) {
-        arguments?.let {
-            greeting = "Welcome back, ${it.getString(User.NAME, "")}"
-        }
+  fun loadArguments(arguments: Bundle?) {
+    arguments?.let {
+      greeting = "Welcome back, ${it.getString(User.NAME, "")}"
     }
+  }
 
   fun deleteUser() {
     mainRepository.progress.value = true

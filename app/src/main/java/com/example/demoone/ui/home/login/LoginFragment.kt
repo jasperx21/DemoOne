@@ -18,29 +18,29 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
   override fun onStart() {
     super.onStart()
 
-      viewModel.loadArguments(arguments)
+    viewModel.loadArguments(arguments)
 
     viewModel.getLoginState()
         .observe(this, Observer {
           if (it is Success)
-              findNavController().navigate(
-                  R.id.action_loginFragment_to_dashboardFragment,
-                  null,
-                  NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
-              )
+            findNavController().navigate(
+                R.id.action_loginFragment_to_dashboardFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+            )
           else if (it is Failure)
             Toast.makeText(activity, it.errorResponse!!.message, Toast.LENGTH_LONG).show()
         })
 
     viewModel.getDeleteUserState()
         .observe(this, Observer {
-            if (it is Success) {
-                findNavController().navigate(
-                    R.id.action_loginFragment_to_registrationFragment,
-                    null,
-                    NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
-                )
-            }
+          if (it is Success) {
+            findNavController().navigate(
+                R.id.action_loginFragment_to_registrationFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+            )
+          }
         })
   }
 

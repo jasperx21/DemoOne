@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.demoone.BaseApplication
 import com.example.demoone.injection.module.ActivityBindingModule
 import com.example.demoone.injection.module.AppModule
+import com.example.demoone.injection.module.NetworkModule
 import com.example.demoone.injection.module.PreferencesModule
 import com.example.demoone.injection.module.ViewModelFactoryModule
 import com.example.demoone.injection.qualifiers.ApplicationContext
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [AppModule::class, PreferencesModule::class, ViewModelFactoryModule::class,
-      AndroidSupportInjectionModule::class, ActivityBindingModule::class]
+      AndroidSupportInjectionModule::class, ActivityBindingModule::class, NetworkModule::class]
 )
 interface AppComponent : AndroidInjector<BaseApplication> {
   @Component.Builder

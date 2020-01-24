@@ -9,9 +9,9 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
 
   fun registerUser(user: User): Result<User> {
     if (user.userName.isEmpty() || user.password.isEmpty() || user.name.isEmpty())
-        return Failure(
-            Error("Invalid credentials")
-        )
+      return Failure(
+          Error("Invalid credentials")
+      )
     else {
       Thread.sleep(3000)
       sharedPreferences.edit()
@@ -19,7 +19,7 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
           .putString(User.NAME, user.name)
           .putString(User.PASSWORD, user.password)
           .apply()
-        return Success(user)
+      return Success(user)
     }
   }
 
@@ -28,9 +28,9 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
   ): Result<User> {
     Thread.sleep(2000)
     return if (password != sharedPreferences.getString(User.PASSWORD, ""))
-        Failure(Error("Wrong Password"))
+      Failure(Error("Wrong Password"))
     else
-        Success(User("", "", ""))
+      Success(User("", "", ""))
   }
 
   fun deleteUser(): Result<User> {
@@ -38,15 +38,15 @@ class UserManager constructor(private val sharedPreferences: SharedPreferences) 
     sharedPreferences.edit()
         .clear()
         .apply()
-      return Success(User("", "", ""))
+    return Success(User("", "", ""))
   }
 
   fun isUserRegistered(): Boolean {
-      Thread.sleep(2000)
+    Thread.sleep(2000)
     return (sharedPreferences.contains(User.USER_NAME) && sharedPreferences.contains(User.PASSWORD))
   }
 
-    fun getName(): String {
+  fun getName(): String {
     return sharedPreferences.getString(User.NAME, "")!!
   }
 

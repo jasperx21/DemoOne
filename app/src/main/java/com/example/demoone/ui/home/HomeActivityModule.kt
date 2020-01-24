@@ -28,13 +28,13 @@ abstract class HomeActivityModule {
   @ContributesAndroidInjector(modules = [DashboardFragmentModule::class])
   internal abstract fun showDashboardFragment(): DashboardFragment
 
-    @FragmentScope
-    @ContributesAndroidInjector
-    internal abstract fun showSearchFragment(): SearchFragment
+  @FragmentScope
+  @ContributesAndroidInjector
+  internal abstract fun showSearchFragment(): SearchFragment
 
-    @FragmentScope
-    @ContributesAndroidInjector
-    internal abstract fun showJokeFragment(): JokeFragment
+  @FragmentScope
+  @ContributesAndroidInjector
+  internal abstract fun showJokeFragment(): JokeFragment
 
   @FragmentScope
   @ContributesAndroidInjector

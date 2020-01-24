@@ -21,11 +21,11 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding, Registrat
     viewModel.getRegistrationState()
         .observe(this, Observer {
           if (it is Success)
-              findNavController().navigate(
-                  R.id.action_registrationFragment_to_dashboardFragment,
-                  null,
-                  NavOptions.Builder().setPopUpTo(R.id.registrationFragment, true).build()
-              )
+            findNavController().navigate(
+                R.id.action_registrationFragment_to_dashboardFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.registrationFragment, true).build()
+            )
           else if (it is Failure)
             Toast.makeText(activity, it.errorResponse!!.message, Toast.LENGTH_LONG).show()
         })
