@@ -1,13 +1,47 @@
 package com.example.demoone.ui.home.login
 
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.example.demoone.R
+import com.example.demoone.data.source.Result.Failure
+import com.example.demoone.data.source.Result.Success
 import com.example.demoone.databinding.FragmentLoginBinding
 import com.example.demoone.ui.base.BaseFragment
-import com.example.demoone.ui.home.HomeViewModel
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, HomeViewModel>() {
-  override fun getViewModelClass(): Class<HomeViewModel> = HomeViewModel::class.java
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
+  override fun getViewModelClass(): Class<LoginViewModel> = LoginViewModel::class.java
 
   override fun getLayout(): Int = R.layout.fragment_login
+
+  override fun onStart() {
+    super.onStart()
+
+    viewModel.loadArguments(arguments)
+
+    viewModel.getLoginState()
+        .observe(this, Observer {
+          if (it is Success)
+            findNavController().navigate(
+                R.id.action_loginFragment_to_dashboardFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+            )
+          else if (it is Failure)
+            Toast.makeText(activity, it.errorResponse!!.message, Toast.LENGTH_LONG).show()
+        })
+
+    viewModel.getDeleteUserState()
+        .observe(this, Observer {
+          if (it is Success) {
+            findNavController().navigate(
+                R.id.action_loginFragment_to_registrationFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+            )
+          }
+        })
+  }
 
 }

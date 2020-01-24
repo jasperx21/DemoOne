@@ -3,12 +3,15 @@ package com.example.demoone.ui.home
 import android.content.Context
 import com.example.demoone.injection.module.BaseActivityModule
 import com.example.demoone.injection.qualifiers.ActivityContext
+import com.example.demoone.injection.scope.ActivityScope
 import com.example.demoone.injection.scope.FragmentScope
 import com.example.demoone.ui.home.dashboard.DashboardFragment
+import com.example.demoone.ui.home.dashboard.DashboardFragmentModule
+import com.example.demoone.ui.home.joke.JokeFragment
 import com.example.demoone.ui.home.login.LoginFragment
 import com.example.demoone.ui.home.register.RegistrationFragment
+import com.example.demoone.ui.home.search.SearchFragment
 import com.example.demoone.ui.home.splash.SplashFragment
-import com.mutualmobile.praxis.injection.scope.ActivityScope
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -22,8 +25,16 @@ abstract class HomeActivityModule {
   internal abstract fun showSplashFragment(): SplashFragment
 
   @FragmentScope
-  @ContributesAndroidInjector
+  @ContributesAndroidInjector(modules = [DashboardFragmentModule::class])
   internal abstract fun showDashboardFragment(): DashboardFragment
+
+  @FragmentScope
+  @ContributesAndroidInjector
+  internal abstract fun showSearchFragment(): SearchFragment
+
+  @FragmentScope
+  @ContributesAndroidInjector
+  internal abstract fun showJokeFragment(): JokeFragment
 
   @FragmentScope
   @ContributesAndroidInjector

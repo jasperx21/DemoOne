@@ -1,26 +1,37 @@
 package com.example.demoone.ui.home.splash
 
-import android.os.Bundle
-import android.os.Handler
+import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.demoone.R
 import com.example.demoone.databinding.FragmentSplashBinding
 import com.example.demoone.ui.base.BaseFragment
-import com.example.demoone.ui.home.HomeViewModel
 
-class SplashFragment : BaseFragment<FragmentSplashBinding, HomeViewModel>() {
-  override fun getViewModelClass(): Class<HomeViewModel> = HomeViewModel::class.java
+class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
+  override fun getViewModelClass(): Class<SplashViewModel> = SplashViewModel::class.java
 
   override fun getLayout(): Int = R.layout.fragment_splash
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+  override fun onStart() {
+    super.onStart()
 
-    Handler().postDelayed({
-      if (viewModel.isUserRegistered())
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-      else
-        findNavController().navigate(R.id.action_splashFragment_to_registrationFragment)
-    }, 2000)
+    viewModel.isUserRegistered()
+    viewModel.getIsUserRegistered()
+        .observe(activity!!, Observer {
+          val destination =
+            if (it) R.id.action_splashFragment_to_loginFragment
+            else R.id.action_splashFragment_to_registrationFragment
+          val arguments = if (it) viewModel.createArgumentsFromSplashToLogin() else null
+          findNavController().navigate(
+              destination,
+              arguments,
+              NavOptions.Builder().setPopUpTo(
+                  R.id.splashFragment,
+                  true
+              ).build()
+          )
+        })
+
   }
+
 }
