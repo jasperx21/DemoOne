@@ -9,13 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.example.demoone.BR
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : DaggerFragment() {
+abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel, AVM : ViewModel> :
+    DaggerFragment() {
   protected lateinit var binding: B
   lateinit var viewModel: VM
+  lateinit var activityViewModel: ViewModel
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -26,14 +29,22 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : DaggerFragmen
     savedInstanceState: Bundle?
   ): View? {
     binding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
-    viewModel =// activity?.let {
-      ViewModelProvider(activity!!, viewModelFactory)[getViewModelClass()]
-    //} ?: throw Exception("Invalid Activity")
-    binding.setVariable(BR.viewModel, viewModel)
+    bindContentView()
     return binding.root
   }
 
+  private fun bindContentView() {
+    viewModel = ViewModelProvider(this, viewModelFactory)[getViewModelClass()]
+    activityViewModel =
+      ViewModelProvider(getActivityViewModelOwner(), viewModelFactory)[getActivityViewModelClass()]
+    binding.setVariable(BR.viewModel, viewModel)
+  }
+
   abstract fun getViewModelClass(): Class<VM>
+
+  abstract fun getActivityViewModelClass(): Class<AVM>
+
+  abstract fun getActivityViewModelOwner(): ViewModelStoreOwner
 
   @LayoutRes
   abstract fun getLayout(): Int

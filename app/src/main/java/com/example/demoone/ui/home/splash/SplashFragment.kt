@@ -1,15 +1,19 @@
 package com.example.demoone.ui.home.splash
 
 import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
 import com.example.demoone.R
 import com.example.demoone.databinding.FragmentSplashBinding
 import com.example.demoone.ui.base.BaseFragment
+import com.example.demoone.ui.home.HomeActivity
+import com.example.demoone.ui.home.HomeViewModel
 
-class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
+class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel, HomeViewModel>() {
+
   override fun getViewModelClass(): Class<SplashViewModel> = SplashViewModel::class.java
-
+  override fun getActivityViewModelClass(): Class<HomeViewModel> = HomeViewModel::class.java
+  override fun getActivityViewModelOwner(): ViewModelStoreOwner = (activity as HomeActivity)
   override fun getLayout(): Int = R.layout.fragment_splash
 
   override fun onStart() {
@@ -24,11 +28,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
           val arguments = if (it) viewModel.createArgumentsFromSplashToLogin() else null
           findNavController().navigate(
               destination,
-              arguments,
-              NavOptions.Builder().setPopUpTo(
-                  R.id.splashFragment,
-                  true
-              ).build()
+              arguments
           )
         })
 
