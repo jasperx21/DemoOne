@@ -31,7 +31,7 @@ class NetworkModule {
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .baseUrl(AppConstants.WIKI_API_BASE_URL)
-//        .client(okHttpClient)
+        .client(okHttpClient)
         .build()
 
   @Provides

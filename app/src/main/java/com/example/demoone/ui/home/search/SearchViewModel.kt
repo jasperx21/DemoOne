@@ -34,7 +34,11 @@ class SearchViewModel @Inject constructor() : BaseViewModel() {
         .observeOn(schedulers.main())
         .doFinally { mainRepository.progress.postValue(false) }
         .subscribe({
-          searchList.postValue(it.query.search)
+          try {
+            searchList.postValue(it.query.search)
+          } catch (e: Exception) {
+            searchList.postValue(arrayListOf())
+          }
         }, {
           Timber.d(it)
         })

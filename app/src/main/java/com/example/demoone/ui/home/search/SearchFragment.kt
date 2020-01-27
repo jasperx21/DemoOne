@@ -36,9 +36,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
       }
 
       override fun onQueryTextChange(newText: String?): Boolean {
-//        newText?.let {
-//          viewModel.getSearchResults(it)
-//        }
+        newText?.let {
+          viewModel.getSearchResults(it)
+        }
         return false
       }
 
