@@ -1,5 +1,6 @@
 package com.example.demoone.ui.home.search
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.demoone.data.model.WikiSearch.Search
@@ -24,6 +25,13 @@ class SearchViewModel @Inject constructor() : BaseViewModel() {
 
   fun init() {
     searchList.postValue(arrayListOf())
+  }
+
+  fun loadArguments(arguments: Bundle?) {
+    arguments?.let {
+      if (it.containsKey("query"))
+        getSearchResults(it.getString("query", ""))
+    }
   }
 
   fun getSearchResults(queryText: String) {

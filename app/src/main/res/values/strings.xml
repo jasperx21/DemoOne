@@ -4,10 +4,10 @@
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="new_message_notification_title_template">New message: %1$s</string>
+  <string name="new_message_notification_title_template">New message: %1$s</string>
 
-    <!-- TODO: remove this placeholder text -->
-    <string name="new_message_notification_placeholder_text_template">You said %1$s and lorem ipsum
+  <!-- TODO: remove this placeholder text -->
+  <string name="new_message_notification_placeholder_text_template">You said %1$s and lorem ipsum
         dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
         semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
         Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
@@ -16,6 +16,6 @@
         tortor.
     </string>
 
-    <string name="action_share">Share</string>
-    <string name="action_reply">Reply</string>
+  <string name="action_share">Share</string>
+  <string name="action_reply">Reply</string>
 </resources>

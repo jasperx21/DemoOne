@@ -45,6 +45,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel, Home
             { viewModel.getSearchResults(it) },
             { Log.d("myTag", it.toString()) }
         )
+
+    viewModel.loadArguments(arguments)
   }
 
   private fun createTextChangeObservable(searchView: SearchView): Observable<String> {
