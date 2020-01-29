@@ -9,12 +9,12 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-  compileSdkVersion 29
+  compileSdkVersion 28
   buildToolsVersion "29.0.2"
   defaultConfig {
     applicationId "com.example.demoone"
     minSdkVersion 15
-    targetSdkVersion 29
+    targetSdkVersion 28
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -28,6 +28,11 @@ android {
 
   dataBinding {
     enabled = true
+  }
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
   }
 }
 
@@ -76,4 +81,11 @@ dependencies {
   // Navigation
   implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
   implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+
+  // Robolectric
+  testImplementation 'org.robolectric:robolectric:4.3.1'
+
+  // Hamcrest
+  testImplementation 'org.hamcrest:hamcrest-all:1.3'
+
 }

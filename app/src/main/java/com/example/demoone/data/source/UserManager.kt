@@ -5,50 +5,54 @@ import com.example.demoone.data.model.User
 import com.example.demoone.data.source.Result.Failure
 import com.example.demoone.data.source.Result.Success
 
+
+/**
+ * Class to emulate user authentication
+ */
 class UserManager constructor(private val sharedPreferences: SharedPreferences) {
 
-  fun registerUser(user: User): Result<User> {
-    if (user.userName.isEmpty() || user.password.isEmpty() || user.name.isEmpty())
-      return Failure(
-          Error("Invalid credentials")
-      )
-    else {
-      Thread.sleep(3000)
-      sharedPreferences.edit()
-          .putString(User.USER_NAME, user.userName)
-          .putString(User.NAME, user.name)
-          .putString(User.PASSWORD, user.password)
-          .apply()
-      return Success(user)
+    fun registerUser(user: User): Result<User> {
+        return if (user.userName.isEmpty() || user.password.isEmpty() || user.name.isEmpty())
+            Failure(
+                Error("Invalid credentials")
+            )
+        else {
+            Thread.sleep(3000)
+            sharedPreferences.edit()
+                .putString(User.USER_NAME, user.userName)
+                .putString(User.NAME, user.name)
+                .putString(User.PASSWORD, user.password)
+                .apply()
+            Success(user)
+        }
     }
-  }
 
-  fun verifyLoginPassword(
-    password: String
-  ): Result<User> {
-    Thread.sleep(2000)
-    return if (password != sharedPreferences.getString(User.PASSWORD, ""))
-      Failure(Error("Wrong Password"))
-    else
-      Success(User("", "", ""))
-  }
+    fun verifyLoginPassword(
+        password: String
+    ): Result<User> {
+        Thread.sleep(2000)
+        return if (password != sharedPreferences.getString(User.PASSWORD, ""))
+            Failure(Error("Wrong Password"))
+        else
+            Success(User("", "", ""))
+    }
 
-  fun deleteUser(): Result<User> {
-    Thread.sleep(2000)
-    sharedPreferences.edit()
-        .clear()
-        .apply()
-    return Success(User("", "", ""))
-  }
+    fun deleteUser(): Result<User> {
+        Thread.sleep(2000)
+        sharedPreferences.edit()
+            .clear()
+            .apply()
+        return Success(User("", "", ""))
+    }
 
-  fun isUserRegistered(): Boolean {
-    Thread.sleep(2000)
-    return (sharedPreferences.contains(User.USER_NAME) && sharedPreferences.contains(User.PASSWORD))
-  }
+    fun isUserRegistered(): Boolean {
+        Thread.sleep(2000)
+        return (sharedPreferences.contains(User.USER_NAME) && sharedPreferences.contains(User.PASSWORD))
+    }
 
-  fun getName(): String {
-    return sharedPreferences.getString(User.NAME, "")!!
-  }
+    fun getName(): String {
+        return sharedPreferences.getString(User.NAME, "")!!
+    }
 
 }
 
