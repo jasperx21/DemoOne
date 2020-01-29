@@ -21,7 +21,9 @@ class HomeActivityTest {
     @Before
     fun setup() {
         activity = Robolectric.buildActivity(HomeActivity::class.java)
-            .create().resume().get()
+                .create()
+                .resume()
+                .get()
     }
 
     @Test
