@@ -29,7 +29,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel, Home
     super.onStart()
     initializeRecyclerView()
     addTextChangeListener()
+    addOnScrollListenerToRecyclerView()
     viewModel.loadArguments(arguments)
+  }
+
+  private fun initializeRecyclerView() {
+    val adapter = WikiSearchResultRecyclerAdapter()
+    binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+    binding.recyclerView.adapter = adapter
+
+    viewModel.getSearchList()
+        .observe(this, Observer {
+          adapter.setSearchResults(it)
+        })
+
   }
 
   private fun addTextChangeListener() {
@@ -42,11 +55,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel, Home
         )
   }
 
-  private fun initializeRecyclerView() {
-    val adapter = WikiSearchResultRecyclerAdapter()
-    binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-    binding.recyclerView.adapter = adapter
-
+  private fun addOnScrollListenerToRecyclerView() {
     binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(
         recyclerView: RecyclerView,
@@ -61,12 +70,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel, Home
         }
       }
     })
-
-    viewModel.getSearchList()
-        .observe(this, Observer {
-          adapter.setSearchResults(it)
-        })
-
   }
 
   private fun createTextChangeObservable(searchView: SearchView): Observable<String> {
