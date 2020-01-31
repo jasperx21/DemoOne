@@ -27,17 +27,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel, Home
 
   override fun onStart() {
     super.onStart()
+    initializeRecyclerView()
+    addTextChangeListener()
+    viewModel.loadArguments(arguments)
+  }
 
-    val adapter = WikiSearchResultRecyclerAdapter()
-    binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-    binding.recyclerView.adapter = adapter
-
-    viewModel.init()
-    viewModel.getSearchList()
-        .observe(this, Observer {
-          adapter.setSearchResults(it)
-        })
-
+  private fun addTextChangeListener() {
     disposable = createTextChangeObservable(binding.searchView)
         .subscribeOn(AndroidSchedulers.mainThread())
         .observeOn(AndroidSchedulers.mainThread())
@@ -45,8 +40,33 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel, Home
             { viewModel.getSearchResults(it) },
             { Log.d("myTag", it.toString()) }
         )
+  }
 
-    viewModel.loadArguments(arguments)
+  private fun initializeRecyclerView() {
+    val adapter = WikiSearchResultRecyclerAdapter()
+    binding.recyclerView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+    binding.recyclerView.adapter = adapter
+
+    binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+      override fun onScrolled(
+        recyclerView: RecyclerView,
+        dx: Int,
+        dy: Int
+      ) {
+        super.onScrolled(recyclerView, dx, dy)
+        if (dy < 0) {
+          binding.rootLayout.transitionToStart()
+        } else if (dy > 0) {
+          binding.rootLayout.transitionToEnd()
+        }
+      }
+    })
+
+    viewModel.getSearchList()
+        .observe(this, Observer {
+          adapter.setSearchResults(it)
+        })
+
   }
 
   private fun createTextChangeObservable(searchView: SearchView): Observable<String> {

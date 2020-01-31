@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <ConstraintSet android:id="@+id/constraint_set_start">
+    <Constraint
+        android:id="@+id/search_view"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+  </ConstraintSet>
+
+  <ConstraintSet android:id="@+id/constraint_set_end">
+    <Constraint
+        android:id="@+id/search_view"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="parent" />
+
+  </ConstraintSet>
+
+  <Transition
+      android:id="@+id/transition_start"
+      app:constraintSetStart="@id/constraint_set_start"
+      app:constraintSetEnd="@id/constraint_set_end"
+      app:duration="1000">
+    <!--    <OnSwipe-->
+    <!--        app:touchAnchorId="@id/root_layout"-->
+    <!--        app:dragDirection="dragUp"-->
+    <!--        app:touchAnchorSide="bottom"/>-->
+  </Transition>
+
+</MotionScene>

@@ -17,15 +17,15 @@ class SearchViewModel @Inject constructor() : BaseViewModel() {
   @Inject
   lateinit var schedulers: IRxSchedulers
 
-  private var searchList = MutableLiveData<ArrayList<Search>>()
+    private var searchList = MutableLiveData<ArrayList<Search>>(arrayListOf())
 
   fun getSearchList(): LiveData<ArrayList<Search>> {
     return searchList
   }
-
-  fun init() {
-    searchList.postValue(arrayListOf())
-  }
+//
+//  fun init() {
+//    searchList.postValue()
+//  }
 
   fun loadArguments(arguments: Bundle?) {
     arguments?.let {
