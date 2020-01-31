@@ -87,4 +87,9 @@ dependencies {
 
   // Hamcrest
   testImplementation 'org.hamcrest:hamcrest-all:1.3'
+
+  // ExoPlayer
+  implementation 'com.google.android.exoplayer:exoplayer-core:2.10.5'
+  implementation 'com.google.android.exoplayer:exoplayer-dash:2.10.5'
+  implementation 'com.google.android.exoplayer:exoplayer-ui:2.10.5'
 }
