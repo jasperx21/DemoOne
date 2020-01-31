@@ -24,6 +24,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
     binding.btnSearch.setOnClickListener {
       findNavController().navigate(R.id.action_dashboardFragment_to_searchFragment)
     }
+
+    binding.btnMusic.setOnClickListener {
+      findNavController().navigate(R.id.action_dashboardFragment_to_musicFragment)
+    }
   }
 
 }

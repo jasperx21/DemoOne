@@ -63,6 +63,9 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_dashboardFragment_to_musicFragment"
+        app:destination="@id/musicFragment" />
   </fragment>
   <fragment
       android:id="@+id/searchFragment"
@@ -76,4 +79,11 @@
       android:name="com.example.demoone.ui.home.joke.JokeFragment"
       android:label="JokeFragment"
       tools:layout="@layout/fragment_joke" />
+  <fragment
+      android:id="@+id/musicFragment"
+      android:name="com.example.demoone.ui.home.musicPlayer.MusicFragment"
+      android:label="MusicFragment"
+      tools:layout="@layout/fragment_music">
+    <deepLink app:uri="demoone://dashboard/music" />
+  </fragment>
 </navigation>

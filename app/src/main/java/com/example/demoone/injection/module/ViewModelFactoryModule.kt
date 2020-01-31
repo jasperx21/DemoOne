@@ -7,6 +7,7 @@ import com.example.demoone.ui.home.HomeViewModel
 import com.example.demoone.ui.home.dashboard.DashboardViewModel
 import com.example.demoone.ui.home.joke.JokeViewModel
 import com.example.demoone.ui.home.login.LoginViewModel
+import com.example.demoone.ui.home.musicPlayer.MusicViewModel
 import com.example.demoone.ui.home.register.RegistrationViewModel
 import com.example.demoone.ui.home.search.SearchViewModel
 import com.example.demoone.ui.home.splash.SplashViewModel
@@ -32,6 +33,11 @@ abstract class ViewModelFactoryModule {
   @IntoMap
   @ViewModelScope(SearchViewModel::class)
   abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
+
+  @Binds
+  @IntoMap
+  @ViewModelScope(MusicViewModel::class)
+  abstract fun bindMusicViewModel(musicViewModel: MusicViewModel): ViewModel
 
   @Binds
   @IntoMap

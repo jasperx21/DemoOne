@@ -31,8 +31,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Go to Search Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btn_music"
         app:layout_constraintTop_toBottomOf="@id/btn_joke"
+        />
+
+    <Button
+        android:id="@+id/btn_music"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to Music Fragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_search"
         />
 
 

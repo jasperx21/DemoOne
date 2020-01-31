@@ -9,6 +9,7 @@ import com.example.demoone.ui.home.dashboard.DashboardFragment
 import com.example.demoone.ui.home.dashboard.DashboardFragmentModule
 import com.example.demoone.ui.home.joke.JokeFragment
 import com.example.demoone.ui.home.login.LoginFragment
+import com.example.demoone.ui.home.musicPlayer.MusicFragment
 import com.example.demoone.ui.home.register.RegistrationFragment
 import com.example.demoone.ui.home.search.SearchFragment
 import com.example.demoone.ui.home.splash.SplashFragment
@@ -31,6 +32,10 @@ abstract class HomeActivityModule {
   @FragmentScope
   @ContributesAndroidInjector
   internal abstract fun showSearchFragment(): SearchFragment
+
+  @FragmentScope
+  @ContributesAndroidInjector
+  internal abstract fun showMusicFragment(): MusicFragment
 
   @FragmentScope
   @ContributesAndroidInjector

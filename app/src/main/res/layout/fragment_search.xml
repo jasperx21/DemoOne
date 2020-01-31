@@ -16,7 +16,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/root_layout"
-      app:layoutDescription="@xml/motion_scene"
+      app:layoutDescription="@xml/motion_scene_search_fragment"
       >
 
     <SearchView

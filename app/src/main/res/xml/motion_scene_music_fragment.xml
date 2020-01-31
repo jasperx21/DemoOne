@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <Transition
+      android:id="@+id/main_transition"
+      app:constraintSetEnd="@layout/fragment_music_motion_scene_end"
+      app:constraintSetStart="@layout/fragment_music_motion_scene_start"
+      app:duration="500">
+    <OnSwipe
+        app:dragDirection="dragUp"
+        app:touchAnchorSide="top"
+        app:touchRegionId="@id/image_view_media_thumbnail" />
+  </Transition>
+
+  <Transition
+      app:constraintSetEnd="@layout/fragment_music_motion_scene_end"
+      app:constraintSetStart="@layout/fragment_music_motion_scene_start"
+      app:duration="500">
+    <OnSwipe
+        app:dragDirection="dragUp"
+        app:touchAnchorSide="top"
+        app:touchRegionId="@id/text_view_title" />
+  </Transition>
+
+  <Transition
+      app:constraintSetEnd="@layout/fragment_music_motion_scene_end"
+      app:constraintSetStart="@layout/fragment_music_motion_scene_start"
+      app:duration="500">
+    <OnSwipe
+        app:dragDirection="dragUp"
+        app:touchAnchorSide="top"
+        app:touchRegionId="@id/button_pause" />
+  </Transition>
+
+  <Transition
+      app:constraintSetEnd="@layout/fragment_music_motion_scene_end"
+      app:constraintSetStart="@layout/fragment_music_motion_scene_start"
+      app:duration="500">
+    <OnSwipe
+        app:dragDirection="dragUp"
+        app:touchAnchorSide="top"
+        app:touchRegionId="@id/button_next" />
+  </Transition>
+</MotionScene>
