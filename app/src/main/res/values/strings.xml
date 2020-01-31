@@ -18,4 +18,5 @@
 
   <string name="action_share">Share</string>
   <string name="action_reply">Reply</string>
+    <string name="media_url_mp3">https://storage.googleapis.com/exoplayer-test-media-0/play.mp3</string>
 </resources>
