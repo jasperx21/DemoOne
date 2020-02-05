@@ -16,12 +16,12 @@
       app:cardCornerRadius="5dp"
       >
     <TextView
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@{media.title}"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         tools:text="Media Title"
-        android:text="@{media.title}"
         />
 
   </androidx.cardview.widget.CardView>

@@ -15,11 +15,16 @@ class MediaRecyclerAdapter : RecyclerView.Adapter<MediaViewHolder>() {
   class MediaViewHolder(val binding: IndiviewMediaBinding) : RecyclerView.ViewHolder(binding.root)
 
   private var mediaList = arrayListOf<Media>()
+    private lateinit var onMediaClickListener: OnMediaClickListener
 
   fun setMediaList(mediaList: ArrayList<Media>) {
     this.mediaList = mediaList
     notifyDataSetChanged()
   }
+
+    fun setOnItemClickListener(onMediaClickListener: OnMediaClickListener) {
+        this.onMediaClickListener = onMediaClickListener
+    }
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
@@ -38,5 +43,12 @@ class MediaRecyclerAdapter : RecyclerView.Adapter<MediaViewHolder>() {
     position: Int
   ) {
     holder.binding.setVariable(BR.media, mediaList[position])
+      holder.itemView.setOnClickListener {
+          onMediaClickListener.onMediaClick(mediaList[position])
+      }
   }
+
+    interface OnMediaClickListener {
+        fun onMediaClick(media: Media)
+    }
 }

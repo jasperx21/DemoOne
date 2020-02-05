@@ -11,6 +11,11 @@
         app:dragDirection="dragUp"
         app:touchAnchorSide="top"
         app:touchRegionId="@id/image_view_media_thumbnail" />
+    <OnClick
+        app:targetId="@id/text_view_title"
+        app:clickAction="transitionToEnd" />
+
+
   </Transition>
 
   <Transition

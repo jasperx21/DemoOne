@@ -42,8 +42,8 @@
           android:id="@+id/tvSnippet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          app:snippetText="@{searchResult.snippet}"
           android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+          app:snippetText="@{searchResult.snippet}"
           tools:text="Snippet"
           />
 

@@ -13,9 +13,9 @@
   </data>
 
   <androidx.constraintlayout.motion.widget.MotionLayout
+      android:id="@+id/root_layout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/root_layout"
       app:layoutDescription="@xml/motion_scene_search_fragment"
       >
 
@@ -24,8 +24,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 

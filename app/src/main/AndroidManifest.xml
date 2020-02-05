@@ -6,6 +6,7 @@
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
   <application
       android:name=".BaseApplication"
@@ -26,7 +27,19 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-      <service android:name=".utils.MusicPlayerService" />
+
+      <service android:name=".ui.home.musicPlayer.MusicPlayerService">
+          <intent-filter>
+              <action android:name="android.media.browse.MediaBrowserService" />
+          </intent-filter>
+      </service>
+
+      <!-- This makes sure to handle Media actions outside of the app, like notification actions and External playback buttons -->
+      <receiver android:name="androidx.media.session.MediaButtonReceiver">
+          <intent-filter>
+              <action android:name="android.intent.action.MEDIA_BUTTON" />
+          </intent-filter>
+      </receiver>
   </application>
 
 </manifest>

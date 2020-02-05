@@ -9,15 +9,16 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-  compileSdkVersion 28
+  compileSdkVersion 29
   buildToolsVersion "29.0.2"
   defaultConfig {
     applicationId "com.example.demoone"
     minSdkVersion 16
-    targetSdkVersion 28
+    targetSdkVersion 29
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    multiDexEnabled true
   }
   buildTypes {
     release {
@@ -33,6 +34,10 @@ android {
     unitTests {
       includeAndroidResources = true
     }
+  }
+  compileOptions {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
   }
 }
 
@@ -90,6 +95,10 @@ dependencies {
 
   // ExoPlayer
   implementation 'com.google.android.exoplayer:exoplayer-core:2.10.5'
-  implementation 'com.google.android.exoplayer:exoplayer-dash:2.10.5'
-  implementation 'com.google.android.exoplayer:exoplayer-ui:2.10.5'
+  implementation "com.google.android.exoplayer:extension-mediasession:2.10.5"
+  //  implementation 'com.google.android.exoplayer:exoplayer-dash:2.10.5'
+  //  implementation 'com.google.android.exoplayer:exoplayer-ui:2.10.5'
+
+  def multidex_version = "2.0.1"
+  implementation "androidx.multidex:multidex:$multidex_version"
 }
