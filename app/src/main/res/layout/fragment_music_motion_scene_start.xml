@@ -13,20 +13,20 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="ADD MUSIC"
-      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toStartOf="@id/button_clear_all"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       />
 
 
   <Button
-      app:layout_constraintTop_toTopOf="parent"
       android:id="@+id/button_clear_all"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="CLEAR ALL"
-      app:layout_constraintStart_toEndOf="@+id/button_add_music"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/button_add_music"
+      app:layout_constraintTop_toTopOf="parent"
       />
 
   <androidx.recyclerview.widget.RecyclerView
@@ -54,9 +54,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="20dp"
       android:visibility="gone"
+      app:layout_constraintBottom_toTopOf="@+id/button_pause"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/text_view_title"
       />
 
 
@@ -65,46 +66,43 @@
       android:layout_width="200dp"
       android:layout_height="wrap_content"
       android:textAppearance="@style/TextAppearance.AppCompat.Title"
-      app:layout_constraintBottom_toBottomOf="@id/root_layout"
+      app:layout_constraintBottom_toBottomOf="@+id/image_view_media_thumbnail"
       app:layout_constraintEnd_toStartOf="@id/button_pause"
       app:layout_constraintStart_toEndOf="@+id/image_view_media_thumbnail"
       app:layout_constraintTop_toTopOf="@id/image_view_media_thumbnail"
       />
 
-  <ImageButton
+  <ImageView
       android:id="@+id/button_pause"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@null"
       android:src="@drawable/ic_pause_black_24dp"
-      app:layout_constraintBottom_toBottomOf="@id/root_layout"
+      app:layout_constraintBottom_toBottomOf="@+id/text_view_title"
       app:layout_constraintEnd_toStartOf="@id/button_next"
       app:layout_constraintStart_toEndOf="@+id/text_view_title"
-      app:layout_constraintTop_toTopOf="@id/image_view_media_thumbnail"
+      app:layout_constraintTop_toTopOf="@+id/text_view_title"
       />
 
-  <ImageButton
+  <ImageView
       android:id="@+id/button_prev"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@null"
       android:src="@drawable/ic_skip_previous_black_24dp"
       android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="@id/root_layout"
-      app:layout_constraintEnd_toEndOf="@id/text_view_title"
+      app:layout_constraintEnd_toStartOf="@+id/button_pause"
       app:layout_constraintTop_toTopOf="@id/image_view_media_thumbnail"
       />
 
-  <ImageButton
+  <ImageView
       android:id="@+id/button_next"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@null"
       android:src="@drawable/ic_skip_next_black_24dp"
-      app:layout_constraintBottom_toBottomOf="@id/root_layout"
+      app:layout_constraintBottom_toBottomOf="@+id/button_pause"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/button_pause"
-      app:layout_constraintTop_toTopOf="@id/image_view_media_thumbnail"
+      app:layout_constraintTop_toTopOf="@+id/button_pause"
       />
 
 

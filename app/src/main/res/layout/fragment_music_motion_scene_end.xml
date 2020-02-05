@@ -13,44 +13,44 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="ADD MUSIC"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/button_clear_all"
-      app:layout_constraintBottom_toTopOf="parent"
       android:visibility="invisible"
+      app:layout_constraintBottom_toTopOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/button_clear_all"
+      app:layout_constraintStart_toStartOf="parent"
       />
 
 
   <Button
-      app:layout_constraintBottom_toTopOf="parent"
       android:id="@+id/button_clear_all"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="CLEAR ALL"
-      app:layout_constraintStart_toEndOf="@+id/button_add_music"
-      app:layout_constraintEnd_toEndOf="parent"
       android:visibility="invisible"
+      app:layout_constraintBottom_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/button_add_music"
       />
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recycler_view"
       android:layout_width="0dp"
       android:layout_height="0dp"
+      android:visibility="invisible"
       app:layout_constraintBottom_toTopOf="@id/image_view_media_thumbnail"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:listitem="@layout/indiview_media"
-      android:visibility="invisible"
       />
 
   <ImageView
       android:id="@+id/image_view_media_thumbnail"
       android:layout_width="150dp"
       android:layout_height="150dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toTopOf="@id/text_view_title"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       />
 
 
@@ -59,10 +59,10 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textAppearance="@style/TextAppearance.AppCompat.Title"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/image_view_media_thumbnail"
       app:layout_constraintBottom_toTopOf="@id/seek_bar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/image_view_media_thumbnail"
       />
 
   <SeekBar
@@ -70,44 +70,41 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="20dp"
+      app:layout_constraintBottom_toTopOf="@id/button_prev"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/text_view_title"
-      app:layout_constraintBottom_toTopOf="@id/button_prev"
       />
 
-  <ImageButton
+  <ImageView
       android:id="@+id/button_prev"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@null"
       android:src="@drawable/ic_skip_previous_black_24dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/seek_bar"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@id/button_pause"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/seek_bar"
       />
 
-  <ImageButton
+  <ImageView
       android:id="@+id/button_pause"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@null"
       android:src="@drawable/ic_pause_black_24dp"
+      app:layout_constraintEnd_toStartOf="@id/button_next"
       app:layout_constraintStart_toEndOf="@id/button_prev"
       app:layout_constraintTop_toTopOf="@id/button_prev"
-      app:layout_constraintEnd_toStartOf="@id/button_next"
       />
 
-  <ImageButton
+  <ImageView
       android:id="@+id/button_next"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@null"
       android:src="@drawable/ic_skip_next_black_24dp"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/button_pause"
       app:layout_constraintTop_toTopOf="@id/button_prev"
-      app:layout_constraintEnd_toEndOf="parent"
       />
 
 

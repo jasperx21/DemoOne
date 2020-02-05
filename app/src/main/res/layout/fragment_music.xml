@@ -86,11 +86,10 @@
         app:layout_constraintTop_toTopOf="@id/image_view_media_thumbnail"
         />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/button_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:src="@drawable/ic_pause_black_24dp"
         app:layout_constraintBottom_toBottomOf="@id/root_layout"
         app:layout_constraintEnd_toStartOf="@id/button_next"
@@ -98,11 +97,10 @@
         app:layout_constraintTop_toTopOf="@id/image_view_media_thumbnail"
         />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/button_prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:src="@drawable/ic_skip_previous_black_24dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/root_layout"
@@ -110,11 +108,10 @@
         app:layout_constraintTop_toTopOf="@id/image_view_media_thumbnail"
         />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/button_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:src="@drawable/ic_skip_next_black_24dp"
         app:layout_constraintBottom_toBottomOf="@id/root_layout"
         app:layout_constraintEnd_toEndOf="parent"
