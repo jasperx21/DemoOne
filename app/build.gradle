@@ -9,12 +9,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-  compileSdkVersion 28
+  compileSdkVersion 29
   buildToolsVersion "29.0.2"
   defaultConfig {
     applicationId "com.example.demoone"
     minSdkVersion 16
-    targetSdkVersion 28
+    targetSdkVersion 29
+    multiDexEnabled true
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -33,6 +34,10 @@ android {
     unitTests {
       includeAndroidResources = true
     }
+  }
+  compileOptions {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
   }
 }
 
@@ -76,7 +81,7 @@ dependencies {
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
   // Coroutines
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}"
 
   // Navigation
   implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
@@ -92,4 +97,7 @@ dependencies {
   implementation 'com.google.android.exoplayer:exoplayer-core:2.10.5'
   implementation 'com.google.android.exoplayer:exoplayer-dash:2.10.5'
   implementation 'com.google.android.exoplayer:exoplayer-ui:2.10.5'
+
+  // Multidex
+  implementation 'com.android.support:multidex:1.0.3'
 }

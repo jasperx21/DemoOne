@@ -86,10 +86,10 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
     super.onActivityResult(requestCode, resultCode, data)
     if (requestCode == AUDIO_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
       if (data.clipData != null) {
-        val count = data.clipData.itemCount
+        val count = data.clipData!!.itemCount
         val mediaList = arrayListOf<Media>()
         for (i in 0 until count) {
-          val mediaUri: Uri = data.clipData.getItemAt(i)
+          val mediaUri: Uri = data.clipData!!.getItemAt(i)
               .uri
           mediaList.add(Media(mediaUri.toString(), mediaUri.toString()))
         }
