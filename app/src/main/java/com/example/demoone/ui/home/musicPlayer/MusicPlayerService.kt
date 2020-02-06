@@ -1,5 +1,6 @@
 package com.example.demoone.ui.home.musicPlayer
 
+import android.app.Notification
 import android.app.Service
 import android.content.Intent
 import android.net.Uri
@@ -21,7 +22,6 @@ import java.util.concurrent.TimeUnit.SECONDS
 
 class MusicPlayerService : Service() {
   companion object {
-    const val MEDIA_URI = "mediaUri"
     const val MEDIA = "media"
     const val ACTION_ADD_MEDIA_TO_PLAYLIST = "addMediaToPlaylist"
     const val ACTION_PLAY_MEDIA = "addPlayMedia"
@@ -30,7 +30,6 @@ class MusicPlayerService : Service() {
     const val ACTION_SKIP_TO_PREVIOUS = "skipToPrevious"
     const val ACTION_SKIP_TO_NEXT = "skipToNext"
     const val ACTION_STOP = "stop"
-    const val ACTION_BIND = "bind"
     const val STATE_PLAYING = true
     const val STATE_PAUSED = false
   }
@@ -68,19 +67,9 @@ class MusicPlayerService : Service() {
 
   override fun onCreate() {
     super.onCreate()
-    initializePlayer()
     notificationBuilder = NotificationBuilder(this)
     notificationManager = NotificationManagerCompat.from(this)
-
-    player.addListener(object : EventListener {
-      override fun onPlayerStateChanged(
-        playWhenReady: Boolean,
-        playbackState: Int
-      ) {
-        this@MusicPlayerService.playWhenReady = playWhenReady
-        buildNotification()
-      }
-    })
+    initializePlayer()
   }
 
   override fun onStartCommand(
@@ -106,14 +95,23 @@ class MusicPlayerService : Service() {
     return START_STICKY
   }
 
-  private fun buildNotification() {
-    if (playlist.isNotEmpty()) {
-      currentTitle = playlist[currentWindow].title!!
-      currentArtist = playlist[currentWindow].artist!!
-      val notification =
-        notificationBuilder.buildNotification(currentTitle, currentArtist, playWhenReady)
-      startForeground(NOW_PLAYING_NOTIFICATION, notification)
-    }
+  private fun buildNotification(): Notification {
+    currentTitle = playlist[currentWindow].title!!
+    currentArtist = playlist[currentWindow].artist!!
+    return notificationBuilder.buildNotification(currentTitle, currentArtist, playWhenReady)
+  }
+
+  private fun startForegroundAndNotify() {
+    val notification = buildNotification()
+    notificationManager.notify(NOW_PLAYING_NOTIFICATION, notification)
+    startForeground(NOW_PLAYING_NOTIFICATION, notification)
+
+  }
+
+  private fun stopForegroundAndNotify() {
+    stopForeground(false)
+    val notification = buildNotification()
+    notificationManager.notify(NOW_PLAYING_NOTIFICATION, notification)
   }
 
   private fun buildMediaSource(uri: Uri): MediaSource {
@@ -165,6 +163,20 @@ class MusicPlayerService : Service() {
     player.playWhenReady = playWhenReady
     player.seekTo(currentWindow, playbackPosition)
     player.prepare(mediaSource, false, false)
+    player.addListener(object : EventListener {
+      override fun onPlayerStateChanged(
+        playWhenReady: Boolean,
+        playbackState: Int
+      ) {
+        this@MusicPlayerService.playWhenReady = playWhenReady
+        if (playlist.isNotEmpty()) {
+          if (playWhenReady)
+            startForegroundAndNotify()
+          else
+            stopForegroundAndNotify()
+        }
+      }
+    })
   }
 
   override fun onDestroy() {

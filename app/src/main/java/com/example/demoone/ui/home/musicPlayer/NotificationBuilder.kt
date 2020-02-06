@@ -11,6 +11,7 @@ import android.os.Build.VERSION_CODES
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.media.app.NotificationCompat.MediaStyle
+import androidx.navigation.NavDeepLinkBuilder
 import com.example.demoone.R
 import com.example.demoone.ui.home.HomeActivity
 import com.example.demoone.ui.home.musicPlayer.MusicPlayerService.Companion.ACTION_PAUSE
@@ -62,8 +63,11 @@ class NotificationBuilder(private val context: Context) {
     if (shouldCreateNowPlayingChannel())
       createNowPlayingChannel()
 
-    val clickIntent = Intent(context, HomeActivity::class.java)
-    val clickPendingIntent = PendingIntent.getActivity(context, 0, clickIntent, 0)
+    val clickPendingIntent = NavDeepLinkBuilder(context)
+        .setComponentName(HomeActivity::class.java)
+        .setGraph(R.navigation.nav_graph)
+        .setDestination(R.id.musicFragment)
+        .createPendingIntent()
 
     val builder = NotificationCompat.Builder(context, NOW_PLAYING_CHANNEL)
     builder.addAction(skipToPreviousAction)
@@ -101,7 +105,7 @@ class NotificationBuilder(private val context: Context) {
   }
 
   private fun shouldCreateNowPlayingChannel() =
-    Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !nowPlayingChannelExists()
+    Build.VERSION.SDK_INT >= VERSION_CODES.O && !nowPlayingChannelExists()
 
   @RequiresApi(VERSION_CODES.O)
   private fun nowPlayingChannelExists() =

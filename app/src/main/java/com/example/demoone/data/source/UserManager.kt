@@ -4,11 +4,14 @@ import android.content.SharedPreferences
 import com.example.demoone.data.model.User
 import com.example.demoone.data.source.Result.Failure
 import com.example.demoone.data.source.Result.Success
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Class to emulate user authentication
  */
-class UserManager constructor(private val sharedPreferences: SharedPreferences) {
+@Singleton
+class UserManager @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
   fun registerUser(user: User): Result<User> {
     return if (user.userName.isEmpty() || user.password.isEmpty() || user.name.isEmpty())

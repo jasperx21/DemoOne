@@ -2,7 +2,6 @@ package com.example.demoone.injection.module
 
 import com.example.demoone.AppConstants
 import com.example.demoone.data.source.WikiApiService
-import com.example.demoone.repository.WikiSearchRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -15,7 +14,9 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-  @Provides @Singleton internal fun provideOkHttpClient(): OkHttpClient {
+  @Provides
+  @Singleton
+  internal fun provideOkHttpClient(): OkHttpClient {
     val httpBuilder = OkHttpClient.Builder()
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -38,10 +39,5 @@ class NetworkModule {
   @Singleton
   fun provideWikiApiService(retrofit: Retrofit): WikiApiService =
     retrofit.create(WikiApiService::class.java)
-
-  @Provides
-  @Singleton
-  fun provideWikiSearchRepository(wikiApiService: WikiApiService): WikiSearchRepository =
-    WikiSearchRepository(wikiApiService)
 
 }

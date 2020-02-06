@@ -1,7 +1,6 @@
 package com.example.demoone.ui.home.musicPlayer
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
@@ -11,7 +10,6 @@ import android.net.Uri
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.IBinder
-import android.util.Log
 import android.widget.SeekBar
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
@@ -44,6 +42,8 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
 
   override fun getLayout(): Int = R.layout.fragment_music
 
+  private lateinit var activityContext: Context
+
   private var compositeDisposable: CompositeDisposable? = null
 
   @Inject
@@ -69,7 +69,6 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
       musicPlayerService = binder.getService()
       isBound = true
       onServiceConnected()
-      Log.d("myTag", "here1")
     }
   }
 
@@ -78,7 +77,6 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
         .subscribeOn(AndroidSchedulers.mainThread())
         .subscribe {
           binding.seekBar.progress = it
-          Log.d("myTag", "here$it")
         }
     )
     binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -106,18 +104,48 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
     }
   }
 
-  @SuppressLint("CheckResult")
+  private fun doBindService() {
+    activityContext.bindService(
+        Intent(context, MusicPlayerService::class.java),
+        connection,
+        Context.BIND_AUTO_CREATE
+    )
+  }
+
+  private fun doUnbindService() {
+    if (isBound) {
+      activityContext.unbindService(connection)
+    }
+  }
+
   override fun onStart() {
     super.onStart()
+    activityContext = activity as HomeActivity
     initializeRecyclerView()
     addOnBackPressedCallback()
+    askStoragePermission()
+    startAndBindService()
+  }
+
+  private fun startAndBindService() {
+    if (!isMusicPlayerServiceRunning())
+      activityContext.startService(Intent(context, MusicPlayerService::class.java))
+    doBindService()
+  }
+
+  private fun askStoragePermission() {
     if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-      rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
+      addDisposable(rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
           .subscribe { granted ->
             if (granted)
               addClickListeners()
           }
+      )
     }
+  }
+
+  private fun isMusicPlayerServiceRunning(): Boolean {
+    return false
   }
 
   private fun addClickListeners() {
@@ -176,8 +204,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
     val intent = Intent(context, MusicPlayerService::class.java)
     intent.action = ACTION_ADD_MEDIA_TO_PLAYLIST
     intent.putExtra(MEDIA, media)
-    context!!.startService(intent)
-    context!!.bindService(intent, connection, Context.BIND_AUTO_CREATE)
+    activityContext.startService(intent)
   }
 
   private fun getMedia(mediaUri: Uri): Media {
@@ -190,6 +217,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
 
   override fun onStop() {
     super.onStop()
+    doUnbindService()
     compositeDisposable?.let {
       it.dispose()
       it.clear()

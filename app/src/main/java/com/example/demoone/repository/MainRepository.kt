@@ -2,8 +2,11 @@ package com.example.demoone.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.demoone.data.source.UserManager
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MainRepository(
+@Singleton
+class MainRepository @Inject constructor(
   val userManager: UserManager,
   val wikiSearchRepository: WikiSearchRepository
 ) {
