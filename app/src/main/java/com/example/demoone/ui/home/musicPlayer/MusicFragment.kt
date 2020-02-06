@@ -55,6 +55,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
 
   private lateinit var musicPlayerService: MusicPlayerService
   private var isBound: Boolean = false
+  private lateinit var adapter: MediaRecyclerAdapter
 
   private val connection = object : ServiceConnection {
     override fun onServiceDisconnected(name: ComponentName?) {
@@ -73,6 +74,10 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
   }
 
   private fun onServiceConnected() {
+
+    if (musicPlayerService.playlist.isEmpty().not())
+      adapter.setMediaList(musicPlayerService.playlist)
+
     addDisposable(musicPlayerService.playbackPositionObservable
         .subscribeOn(AndroidSchedulers.mainThread())
         .subscribe {
@@ -85,11 +90,13 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
         progress: Int,
         fromUser: Boolean
       ) {
-        musicPlayerService.seekToPosition(progress)
       }
 
       override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-      override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+
+      override fun onStopTrackingTouch(seekBar: SeekBar?) {
+        musicPlayerService.seekToPosition(seekBar!!.progress)
+      }
     })
 
 
@@ -97,7 +104,10 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
       musicPlayerService.skipToNext()
     }
     binding.buttonPause.setOnClickListener {
-      musicPlayerService.pause()
+      if (musicPlayerService.playWhenReady)
+        musicPlayerService.pause()
+      else
+        musicPlayerService.play()
     }
     binding.buttonPrev.setOnClickListener {
       musicPlayerService.skipToPrevious()
@@ -164,7 +174,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
   }
 
   private fun initializeRecyclerView() {
-    val adapter = MediaRecyclerAdapter()
+    adapter = MediaRecyclerAdapter()
     adapter.setOnMediaActionListener(object : OnMediaActionListener {
       override fun onMediaClick(media: Media) {
         playMedia(media)
@@ -201,6 +211,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicViewModel, HomeVie
   }
 
   fun playMedia(media: Media) {
+
     val intent = Intent(context, MusicPlayerService::class.java)
     intent.action = ACTION_ADD_MEDIA_TO_PLAYLIST
     intent.putExtra(MEDIA, media)

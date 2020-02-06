@@ -38,7 +38,8 @@ class MusicPlayerService : Service() {
     ExoPlayerFactory.newSimpleInstance(this)
   }
 
-  private var playWhenReady = true
+  var playWhenReady = true
+
   private var currentWindow = 0
   private var playbackPosition: Long = 0
 
@@ -47,7 +48,7 @@ class MusicPlayerService : Service() {
   private lateinit var notificationBuilder: NotificationBuilder
   private lateinit var notificationManager: NotificationManagerCompat
 
-  private val playlist = ArrayList<Media>()
+  val playlist = ArrayList<Media>()
 
   val playbackPositionObservable: Observable<Int> = Observable.interval(1, SECONDS)
       .observeOn(AndroidSchedulers.mainThread())
@@ -103,15 +104,13 @@ class MusicPlayerService : Service() {
 
   private fun startForegroundAndNotify() {
     val notification = buildNotification()
-    notificationManager.notify(NOW_PLAYING_NOTIFICATION, notification)
     startForeground(NOW_PLAYING_NOTIFICATION, notification)
 
   }
 
   private fun stopForegroundAndNotify() {
+    startForeground(NOW_PLAYING_NOTIFICATION, buildNotification())
     stopForeground(false)
-    val notification = buildNotification()
-    notificationManager.notify(NOW_PLAYING_NOTIFICATION, notification)
   }
 
   private fun buildMediaSource(uri: Uri): MediaSource {
