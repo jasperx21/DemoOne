@@ -31,7 +31,6 @@ class MusicPlayerService : Service() {
     const val ACTION_SKIP_TO_NEXT = "skipToNext"
     const val ACTION_STOP = "stop"
     const val STATE_PLAYING = true
-    const val STATE_PAUSED = false
   }
 
   private val player: SimpleExoPlayer by lazy {
